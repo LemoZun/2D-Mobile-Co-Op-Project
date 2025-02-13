@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -133,15 +134,20 @@ public class SkillUIView : UIBInder
     /// </summary>
     private void UpdateCooldown()
     {
+        StringBuilder sb = new StringBuilder();
         foreach (SkillSlot slot in SkillSlots)
         {
             if(slot == null || slot.SkillOwner == null)
-                Debug.LogWarning("dddddddd");
+                continue;
             
             float remainingTime = slot.SkillOwner.CoolTimeCounter;
             float totalTime = slot.SkillData != null ? slot.SkillData.Cooltime : 0f;
 
-            slot.CooldownText.text = remainingTime.ToString("0.0");
+            sb.Clear();
+            sb.AppendFormat("{0:0.0}", remainingTime);
+            slot.CooldownText.text = sb.ToString();
+
+            //slot.CooldownText.text = remainingTime.ToString("0.0");
             
             float ratio = (totalTime > 0f) ? (remainingTime / totalTime) : 0f;
             slot.HideImage.fillAmount = ratio;
