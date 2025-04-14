@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Programing.PJM.Scripts.BTree.Nodes;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -79,7 +80,7 @@ public abstract class BaseUnitController : MonoBehaviour
         if (Time.timeScale == 0)
             return;
         
-        // ÄðÅ¸ÀÓ 
+        // ï¿½ï¿½Å¸ï¿½ï¿½ 
         if (CoolTimeCounter > 0)
         {
             CoolTimeCounter -= UnitModel.CoolDownAcc * Time.deltaTime;
@@ -94,7 +95,7 @@ public abstract class BaseUnitController : MonoBehaviour
     }
 
 
-    protected abstract BaseNode SetBTree(); // °¢ À¯´ÖÀÌ ±¸ÇöÇÒ Çàµ¿ Æ®¸® ¸Þ¼­µå
+    protected abstract BaseNode SetBTree(); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿ Æ®ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 
     protected virtual void SetLayer()
     {
@@ -113,7 +114,7 @@ public abstract class BaseUnitController : MonoBehaviour
         {
             if (stateInfo.normalizedTime < 1.0f)
             {
-                // Á×´ÂÁß
+                // ï¿½×´ï¿½ï¿½ï¿½
                 return BaseNode.ENodeState.Running;
             }
             else if (stateInfo.normalizedTime >= 1.0f)
@@ -137,7 +138,7 @@ public abstract class BaseUnitController : MonoBehaviour
 
     protected BaseNode.ENodeState CheckCrowdControl()
     {
-        // ´õ Ãß°¡ ¿¹Á¤?, ¿©·¯ »óÅÂÀÌ»óµéÀÌ µ¿½Ã¿¡ °É·ÈÀ»¶§ °ü¸® ÇÊ¿ä
+        // ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½?, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½É·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
         switch (UnitModel.CurCc)
         {
             case CrowdControls.Stun:
@@ -164,21 +165,21 @@ public abstract class BaseUnitController : MonoBehaviour
         {
             UnitViewer.UnitAnimator.SetBool(UnitViewer.ParameterHash[(int)Parameter.Attack], false);
             IsAttacking = false;
-            Debug.Log(" Å¸°ÙÀÌ À¯È¿ÇÏÁö ¾Ê¾Æ °ø°Ý ½ÇÆÐ."); // °ø°Ý ¾Ö´Ï¸ÞÀÌ¼Ç ÁøÇàÁß ´ë»óÀÌ »ç¶óÁ³À» °æ¿ì?
+            Debug.Log(" Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½."); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½?
             return BaseNode.ENodeState.Failure;
         }
         
-        if ((UnitModel.CurCc & CrowdControls.Taunt) != 0) // °É¸° »óÅÂÀÌ»ó Áß µµ¹ßÀÌ ÀÖÀ»°æ¿ì
+        if ((UnitModel.CurCc & CrowdControls.Taunt) != 0) // ï¿½É¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì»ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
-            if (UnitModel.CcCaster != null && UnitModel.CcCaster.gameObject.activeSelf) // µµ¹ßÀ» °Ç ´ë»óÀÌ À¯È¿ÇÑ ´ë»óÀÏ ¶§
+            if (UnitModel.CcCaster != null && UnitModel.CcCaster.gameObject.activeSelf) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             {
                 CurrentTarget = UnitModel.CcCaster;
             }
         }
         
         UnitViewer.CheckNeedFlip(transform, CurrentTarget.transform);
-        // °ø°ÝÀ» ½ÃÀÛ
-        // °ø°Ý ÆÄ¶ó¹ÌÅÍ°¡ False¿´À» °æ¿ì¿¡¸¸ True·Î ¹Ù²ãÁÖ¸ç °ø°Ý ½ÃÀÛ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í°ï¿½ Falseï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ Trueï¿½ï¿½ ï¿½Ù²ï¿½ï¿½Ö¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         UnitViewer.UnitAnimator.SetBool(UnitViewer.ParameterHash[(int)Parameter.Run], false);
         
         if(!UnitViewer.UnitAnimator.GetBool(UnitViewer.ParameterHash[(int)Parameter.Attack]))
@@ -188,23 +189,23 @@ public abstract class BaseUnitController : MonoBehaviour
             return BaseNode.ENodeState.Running;
         }
         
-        // °ø°Ý ÁøÇàÁß, Attack ÆÄ¶ó¹ÌÅÍ True »óÅÂ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Attack ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ True ï¿½ï¿½ï¿½ï¿½
         var stateInfo = UnitViewer.UnitAnimator.GetCurrentAnimatorStateInfo(0);
         switch (stateInfo.normalizedTime)
         {
             case < 1.0f:
-                //Debug.Log($"{gameObject.name}°¡ {CurrentTarget.gameObject.name}¸¦ °ø°Ý Áß");
+                //Debug.Log($"{gameObject.name}ï¿½ï¿½ {CurrentTarget.gameObject.name}ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½");
                 return BaseNode.ENodeState.Running;
             case >= 1.0f:
-                // °ø°Ý ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ³¡³µÀ» °æ¿ì
-                //Debug.Log($"{gameObject.name}°¡ {CurrentTarget.gameObject.name}¿¡ ´ëÇÑ °ø°ÝÀ» ¿Ï·á");
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+                //Debug.Log($"{gameObject.name}ï¿½ï¿½ {CurrentTarget.gameObject.name}ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
                 UnitViewer.UnitAnimator.SetBool(UnitViewer.ParameterHash[(int)Parameter.Attack], false);
                 IsAttacking = false;
-                // °ø°Ý¼öÇà µ¥¹ÌÁö Àû¿ë ½ÃÅ´
+                // ï¿½ï¿½ï¿½Ý¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å´
                 CurrentTarget.UnitModel.TakeDamage(UnitModel.AttackPoint);
                 return BaseNode.ENodeState.Success;
             default:
-                Debug.LogWarning("¿¹»óÄ¡ ¸øÇÑ »óÅÂ¿¡¼­ °ø°Ý ½ÇÆÐ.");
+                Debug.LogWarning("ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
                 return BaseNode.ENodeState.Failure;
         }
     }
@@ -228,13 +229,13 @@ public abstract class BaseUnitController : MonoBehaviour
         
         //UnitAnimator.SetTrigger("Attack");
         
-        // ¾Ö´Ï¸ÞÀÌ¼ÇÀÇ ±æÀÌ¸¸Å­ ´ë±â ÈÄ ¸®¼Â + ÈÄµô·¹ÀÌ?
-        // ÇöÀç ¾Ö´Ï¸ÞÀÌÅÍÀÇ info¸¦ °¡Á®¿À±â ¶§¹®¿¡ ½ÇÁ¦ °ø°Ý ¾Ö´Ï¸ÞÀÌ¼ÇÀÇ ±æÀÌÀÎÁö È®½Å ÇÒ ¼ö ¾øÀ½ ´Ù¸¥¹æ¹ý ÇÊ¿ä
-        //Debug.Log($"{UnitViewer.UnitAnimator.GetCurrentAnimatorStateInfo(0).length + _tempDelay}ÃÊ ÈÄ ¸®¼Â");
-        yield return new WaitForSeconds(1.0f); // ¾Ö´Ï¸ÞÀÌ¼Ç ±æÀÌ
+        // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½Å­ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ + ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½?
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ infoï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
+        //Debug.Log($"{UnitViewer.UnitAnimator.GetCurrentAnimatorStateInfo(0).length + _tempDelay}ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+        yield return new WaitForSeconds(1.0f); // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
         //UnitViewer.UnitAnimator.SetBool(UnitViewer.parameterHash[(int)UnitView.AniState.Attack], false);
         IsAttacking = false;
-        Debug.Log($"{animationName} ¾Ö´Ï¸ÞÀÌ¼Ç ¿Ï·á: °ø°Ý ¸®¼ÂµÊ.");
+        Debug.Log($"{animationName} ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ï·ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Âµï¿½.");
     }
     protected BaseNode.ENodeState ChaseTarget()
     {
@@ -242,30 +243,30 @@ public abstract class BaseUnitController : MonoBehaviour
         {
             UnitViewer.CheckNeedFlip(transform, DetectedEnemy.transform);
             float sqrDistance = Vector2.SqrMagnitude(DetectedEnemy.gameObject.transform.position - transform.position);
-            if (sqrDistance > UnitModel.AttackRange * UnitModel.AttackRange) // Å¸°ÙÀÌ °ø°Ý ¹üÀ§º¸´Ù ¸Ö¶§
+            if (sqrDistance > UnitModel.AttackRange * UnitModel.AttackRange) // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¶ï¿½
             {
-                UnitViewer.UnitAnimator.SetBool(UnitViewer.ParameterHash[(int)Parameter.Attack], false); // ÀÓ½Ã
+                UnitViewer.UnitAnimator.SetBool(UnitViewer.ParameterHash[(int)Parameter.Attack], false); // ï¿½Ó½ï¿½
                 UnitViewer.UnitAnimator.SetBool(UnitViewer.ParameterHash[(int)Parameter.Run], true);
                 transform.position = Vector2.MoveTowards(transform.position, DetectedEnemy.gameObject.transform.position, UnitModel.Movespeed * Time.deltaTime);
-                //Debug.Log($"Å¸°Ù {DetectedEnemy.gameObject.name}¸¦ ÃßÀû Áß");
+                //Debug.Log($"Å¸ï¿½ï¿½ {DetectedEnemy.gameObject.name}ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½");
                 return BaseNode.ENodeState.Running;
             }
-            else // Å¸°ÙÀÌ °ø°Ý ¹üÀ§ ³»¿¡ ÀÖÀ»¶§ , Çàµ¿Æ®¸® ÈÄ¹Ý¿¡ ÀÖ¾î¼­ °ø°ÝÀ¸·Î ¹Ù·Î ³Ñ¾î°¡¼­ ¶ßÁö ¾ÊÀ½
+            else // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ , ï¿½àµ¿Æ®ï¿½ï¿½ ï¿½Ä¹Ý¿ï¿½ ï¿½Ö¾î¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             {
                 UnitViewer.UnitAnimator.SetBool(UnitViewer.ParameterHash[(int)Parameter.Run], false);
-                //Debug.Log($"Å¸°Ù {DetectedEnemy.gameObject.name} ÃßÀû¿Ï·á");
+                //Debug.Log($"Å¸ï¿½ï¿½ {DetectedEnemy.gameObject.name} ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½");
                 return BaseNode.ENodeState.Success;
             }
         }
-        // Å¸°ÙÀÌ ¾øÀ»¶§
-        Debug.Log("Å¸°Ù ¾øÀ½");
+        // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
         UnitViewer.UnitAnimator.SetBool(UnitViewer.ParameterHash[(int)Parameter.Run], false);
         return BaseNode.ENodeState.Failure;
     }
 
     protected BaseNode.ENodeState StayIdle()
     {
-        Debug.Log("Idle »óÅÂ");
+        Debug.Log("Idle ï¿½ï¿½ï¿½ï¿½");
         UnitViewer.UnitAnimator.SetBool(UnitViewer.ParameterHash[(int)Parameter.Attack], false);
         UnitViewer.UnitAnimator.SetBool(UnitViewer.ParameterHash[(int)Parameter.Run], false);
         return BaseNode.ENodeState.Success;
@@ -305,17 +306,17 @@ public abstract class BaseUnitController : MonoBehaviour
 
     protected abstract BaseNode.ENodeState SetDetectedTarget();
     /*{
-        //Debug.LogWarning("Ä«¸Þ¶ó ¹üÀ§¿¡¼­ Àû Ã¼Å©´Â °ú°Å»ç¾çÀÔ´Ï´Ù.");
+        //Debug.LogWarning("Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½Å»ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
         throw new System.NotImplementedException();
-        /*Debug.LogWarning("±âº» Å¸°Ù ¼¼ÆÃ ¸Þ¼­µå ½ÇÇàÁß");
-        if ((UnitModel.CurCc & CrowdControls.Taunt) != 0) // °É¸° »óÅÂÀÌ»ó Áß µµ¹ßÀÌ ÀÖÀ»°æ¿ì
+        /*Debug.LogWarning("ï¿½âº» Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        if ((UnitModel.CurCc & CrowdControls.Taunt) != 0) // ï¿½É¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì»ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
-            if (UnitModel.CcCaster != null && UnitModel.CcCaster.gameObject.activeSelf) // µµ¹ßÀ» °Ç ´ë»óÀÌ À¯È¿ÇÑ ´ë»óÀÏ ¶§
+            if (UnitModel.CcCaster != null && UnitModel.CcCaster.gameObject.activeSelf) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             {
                 DetectedEnemy = UnitModel.CcCaster;
             }
         }
-        // ÀÌ¹Ì °¨ÁöµÈ ÀûÀÌ ÀÖ¾úÀ»°æ¿ì¿£ ¼öÇàÇÒ ÇÊ¿ä ¾øÀ½,  ¹Ù·Î chase·Î ÀüÈ¯
+        // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ì¿£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½,  ï¿½Ù·ï¿½ chaseï¿½ï¿½ ï¿½ï¿½È¯
         if(DetectedEnemy != null && DetectedEnemy.gameObject.activeSelf)
             return BaseNode.ENodeState.Success;
         
@@ -337,7 +338,7 @@ public abstract class BaseUnitController : MonoBehaviour
             BaseUnitController unit = col.gameObject.GetComponent<BaseUnitController>();
             if (unit == null)
             {
-                Debug.LogWarning($"{col.gameObject.name}¿¡ BaseUnitController°¡ ¾ø´Ù.");
+                Debug.LogWarning($"{col.gameObject.name}ï¿½ï¿½ BaseUnitControllerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
                 continue;
             }
             
@@ -357,12 +358,12 @@ public abstract class BaseUnitController : MonoBehaviour
         }
         if (UnitModel.IsPriorityTargetFar)
         {
-            // °¡Àå ¸Õ Å¸°ÙÀ» DetectedEnemy ·Î ¼³Á¤
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ DetectedEnemy ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             DetectedEnemy = farthestEnemy;
         }
         else
         {
-            // °¡Àå °¡±î¿î Å¸°ÙÀ» DetectedEnemy·Î ¼³Á¤
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ DetectedEnemyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             DetectedEnemy = closetEnemy;
         }
         
@@ -374,7 +375,7 @@ public abstract class BaseUnitController : MonoBehaviour
 
     /*protected void ExtractDetectedTargetFromList()
     {
-        // ½ºÆùÀÌ ¿Ï·áµÈ ÀÌº¥Æ®¿¡ ¸ÂÃç¼­ ½ÇÇàµÉ ¸Þ¼­µå? ¾Æ´Ï¸é ±×³É ¸®½ºÆ®¿¡¼­ ÃßÃâ¸¸?
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ç¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½? ï¿½Æ´Ï¸ï¿½ ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¸¸?
         if(AllianceLayer == )
         
     }*/
@@ -402,10 +403,10 @@ public abstract class BaseUnitController : MonoBehaviour
         Vector2 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
         Vector2 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
         
-        Gizmos.DrawLine(new Vector3(bottomLeft.x, bottomLeft.y, 0), new Vector3(topRight.x, bottomLeft.y, 0)); // ¾Æ·¡ÂÊ
-        Gizmos.DrawLine(new Vector3(bottomLeft.x, topRight.y, 0), new Vector3(topRight.x, topRight.y, 0));    // À§ÂÊ
-        Gizmos.DrawLine(new Vector3(bottomLeft.x, bottomLeft.y, 0), new Vector3(bottomLeft.x, topRight.y, 0)); // ¿ÞÂÊ
-        Gizmos.DrawLine(new Vector3(topRight.x, bottomLeft.y, 0), new Vector3(topRight.x, topRight.y, 0));    // ¿À¸¥ÂÊ
+        Gizmos.DrawLine(new Vector3(bottomLeft.x, bottomLeft.y, 0), new Vector3(topRight.x, bottomLeft.y, 0)); // ï¿½Æ·ï¿½ï¿½ï¿½
+        Gizmos.DrawLine(new Vector3(bottomLeft.x, topRight.y, 0), new Vector3(topRight.x, topRight.y, 0));    // ï¿½ï¿½ï¿½ï¿½
+        Gizmos.DrawLine(new Vector3(bottomLeft.x, bottomLeft.y, 0), new Vector3(bottomLeft.x, topRight.y, 0)); // ï¿½ï¿½ï¿½ï¿½
+        Gizmos.DrawLine(new Vector3(topRight.x, bottomLeft.y, 0), new Vector3(topRight.x, topRight.y, 0));    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         /*Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, _detectRange);
@@ -477,7 +478,7 @@ private BaseNode.ENodeState TempMethod()
 /*if (_detectedEnemy != null)
             return true;
 
-        // ÇöÀç Ä«¸Þ¶ó¿¡ º¸ÀÌ´Â ÀüÃ¼ ¿µ¿ª Å½Áö
+        // ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ Å½ï¿½ï¿½
 
         //Rect screenRect = new Rect(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
         Collider2D[] detectedEnemys = Physics2D.OverlapAreaAll(_bottomLeft,_topRight, _enemyLayer);
@@ -490,7 +491,7 @@ private BaseNode.ENodeState TempMethod()
 
         return false;*/
         
-/*// °¡Àå ¸ÕÀú Å½ÁöÇÑ ÀûÀ» ¿ì¼±ÀûÀ¸·Î °ø°ÝÇÒ °æ¿ì
+/*// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 Collider2D[] detectedColliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, _enemyLayer);
 if (detectedColliders.Length > 0)
 {
